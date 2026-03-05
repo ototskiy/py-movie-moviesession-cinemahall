@@ -1,4 +1,5 @@
 from django.db.models import QuerySet
+from django.template.defaultfilters import title
 
 from db.models import Movie
 
@@ -15,7 +16,7 @@ def get_movies(
         movies = movies.filter(genres__id__in=genres_ids)
     if actors_ids:
         movies = movies.filter(actors__id__in=actors_ids)
-    return movies
+    return movies.distinct()
 
 
 def get_movie_by_id(movie_id: int) -> Movie:
